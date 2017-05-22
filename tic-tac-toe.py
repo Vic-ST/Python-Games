@@ -117,5 +117,14 @@ def getComputerMove(board,computerLetter):
     return chooseRandomMoveFromList(board, [2,4,6,8])
 
 def isBoardFull(board):
-    # Return True if all spaces on the board are full
+    # Return True if all spaces on the board are full. Otherwise, return False
+    for i in range(1,10):
+        if isSpaceFree(board, i):
+            return False
+    return True
+
+
+print("Welcome to Tic-Tac-Toe!")
+
+while True:
     
