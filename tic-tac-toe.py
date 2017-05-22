@@ -81,4 +81,41 @@ def chooseRandomMoveFromList(board, movesList):
         return None
 
 def getComputerMove(board,computerLetter):
+    # Get computer move
+    if computerLetter == "X":
+        playerLetter == "O"
+    else:
+        playerLetter == "X"
+
+    # Here is the first algorithm
+    # Check if you can win on the next move
+    for i in range(1,10):
+        boardCopy = getBoardCopy(board)
+        if isSpaceFree(boardCopy, i):
+            makeMove(boardCopy, computerLetter)
+            if isWinner(boardCopy, playerLetter):
+                return i
+
+    # Check if the player could win on there next turn and block them
+    for i in range(1,10):
+        boardCopy = getBoardCopy(board)
+        if isSpaceFree(boardCopy, i):
+            makeMove(boardCopy, computerLetter, i)
+            if isWinner(boardCopy, playerLetter):
+                return i
+
+    # Try to take one of the corners, if they are free
+    move = chooseRandomMoveFromList(board, [1,3,7,9])
+    if move != None:
+        return move
+
+    # Try to take the center, if its free.
+    if spaceIsFree(board, 5):
+        return 5
+
+    # Move on one of the sides
+    return chooseRandomMoveFromList(board, [2,4,6,8])
+
+def isBoardFull(board):
+    # Return True if all spaces on the board are full
     
