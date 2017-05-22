@@ -10,7 +10,7 @@ def drawBoard(board):
     print('-+-+-')
     print(board[4] + '|' + board[5] + '|' + board[6])
     print('-+-+-')
-    print(board[3] + '|' + board[2] + '|' + board[1])
+    print(board[1] + '|' + board[2] + '|' + board[3])
 
 def inputPlayerLetter():
     #player choose letter(X or O)
@@ -63,7 +63,7 @@ def getPlayerMove(board):
     # get player move
     move = ' '
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-        print("Whats your next move?")
+        print("Whats your next move? (1-9)")
         move = input()
     return int(move)
 
@@ -130,8 +130,8 @@ while True:
     # reset the board
     theBoard = [' '] * 10
     playerLetter, computerLetter = inputPlayerLetter()
-    turn = whoGoesFirst
-    print("The " + str(turn) + " will go first.")
+    turn = whoGoesFirst()
+    print("The " + turn + " will go first.")
     gameIsPlaying = True
 
     while gameIsPlaying:
