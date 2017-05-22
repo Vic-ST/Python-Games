@@ -92,7 +92,7 @@ def getComputerMove(board,computerLetter):
     for i in range(1,10):
         boardCopy = getBoardCopy(board)
         if isSpaceFree(boardCopy, i):
-            makeMove(boardCopy, computerLetter)
+            makeMove(boardCopy, computerLetter, i)
             if isWinner(boardCopy, playerLetter):
                 return i
 
@@ -131,7 +131,7 @@ while True:
     theBoard = [' '] * 10
     playerLetter, computerLetter = inputPlayerLetter()
     turn = whoGoesFirst
-    print("The " + turn + " will go first.")
+    print("The " + str(turn) + " will go first.")
     gameIsPlaying = True
 
     while gameIsPlaying:
@@ -158,7 +158,7 @@ while True:
             move = getComputerMove(theBoard, computerLetter)
             makeMove(theBoard, computerLetter, move)
 
-            if isWinner(theBoard, computerLEtter):
+            if isWinner(theBoard, computerLetter):
                 drawBoard(theBoard)
                 print("The computer has beaten you! You lose.")
                 gameIsPlaying = False
@@ -169,4 +169,7 @@ while True:
                     break
                 else:
                     turn = "player"
+        
     print("Do you want to play again? (yes or no)")
+    if not input().lower().startswith('y'):
+        break
