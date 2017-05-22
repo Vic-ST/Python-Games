@@ -127,4 +127,12 @@ def isBoardFull(board):
 print("Welcome to Tic-Tac-Toe!")
 
 while True:
-    
+    # reset the board
+    theBoard = [' '] * 10
+    playerLetter, computerLetter = inputPlayerLetter()
+    turn = whoGoesFirst
+    print("The " + turn + " will go first.")
+    gameIsPlaying = True
+
+    while gameIsPlaying:
+        
