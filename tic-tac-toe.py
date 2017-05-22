@@ -158,4 +158,15 @@ while True:
             move = getComputerMove(theBoard, computerLetter)
             makeMove(theBoard, computerLetter, move)
 
-            
+            if isWinner(theBoard, computerLEtter):
+                drawBoard(theBoard)
+                print("The computer has beaten you! You lose.")
+                gameIsPlaying = False
+            else:
+                if isBoardFull(theBoard):
+                    drawBoard(theBoard)
+                    print("The game is a tie!")
+                    break
+                else:
+                    turn = "player"
+    print("Do you want to play again? (yes or no)")
