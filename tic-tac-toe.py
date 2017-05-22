@@ -28,3 +28,10 @@ def inputPlayerLetter():
 
 def whoGoesFirst():
     # rand choose who goes first
+    if random.randint(0,1) == 0:
+        return "computer"
+    else:
+        return "player"
+
+def makeMove(board, letter, move):
+    
