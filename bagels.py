@@ -21,7 +21,7 @@ def getClues(guess, secretNum):
     for i in range(len(guess)):
         if guess[i] == secretNum[i]:
             clues.append('Fermi')
-        elif guess[] in secretNum[i]:
+        elif guess[i] in secretNum[i]:
             clues.append('Pico')
     if len(clues) == 0:
         return 'Bagels'
@@ -41,7 +41,7 @@ def isOnlyDigits(num):
     return True
 
 
-print('I am thinking of a %s-digit number. Try to guess what it is.' % (NUM-DIGITS))
+print('I am thinking of a %s-digit number. Try to guess what it is.' % (NUM_DIGITS))
 print('The clues  I give are...')
 print('When I say    That means:')
 print('  Bagels      None of the digits is correct.')
