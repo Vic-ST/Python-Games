@@ -15,7 +15,20 @@ def getSecretNum():
 def getClues(guess, secretNum):
     # Return a string with Pico, Fermi, & Bagels clues to the user.
     if guess == secretNum:
-        return "You got it!"
+        return 'You got it!'
 
     clues = []
+    for i in range(len(guess)):
+        if guess[i] == secretNum[i]:
+            clues.append('Fermi')
+        elif guess[] in secretNum[i]:
+            clues.append('Pico')
+    if len(clues) == 0:
+        return 'Bagels'
+
+    clues.sort()
+    return ''.join(clues)
+
+def isOnlyDigits(num):
+    # Returns True if num is a string of only digits. Otherwise, returns False.
     
