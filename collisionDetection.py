@@ -84,3 +84,17 @@ while True:
     windowSurface.fill(WHITE)
 
     # Move the player
+    if moveLeft and player.left > 0:
+        player.left -= MOVESPEED
+    if moveRight and player.right < WINDOWWIDTH:
+        player.right += MOVESPEED
+
+    # Draw the player on the surface.
+    pygame.draw.Rect(windowSurface, BLACK, player)
+
+    # Check whether the player has intersected with any food squares.
+    for food in foods[:]:
+        if player.colliderect(food):
+            foods.remove(food)
+
+    # Draw the food
