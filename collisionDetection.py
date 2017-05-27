@@ -55,7 +55,7 @@ while True:
             if event.key == K_DOWN or event.key == K_s:
                 moveUp = False
                 moveDown = True
-        if event.key == KEYUP:
+        if event.type == KEYUP:
             if event.key == K_ESCAPE:
                 pygame.quit()
                 sys.exit()
@@ -68,14 +68,14 @@ while True:
             if event.key == K_DOWN or event.key == K_s:
                 moveDown = False
             if event.key == K_x:
-                player.top = randomint(0, WINDOWHEIGHT - player.height)
-                player.left = randomint(0, WINDOWWIDTH - player.width)
+                player.top = random.randint(0, WINDOWHEIGHT - player.height)
+                player.left = random.randint(0, WINDOWWIDTH - player.width)
             
         if event.type == MOUSEBUTTONUP:
             foods.append(pygame.Rect(event.pos[0], event.pos[1], FOODSIZE, FOODSIZE))
 
     foodCounter += 1
-    if foodCount >= NEWFOOD:
+    if foodCounter >= NEWFOOD:
         # Add new food.
         foodCounter = 0
         foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
@@ -94,7 +94,7 @@ while True:
         player.right += MOVESPEED
 
     # Draw the player on the surface.
-    pygame.draw.Rect(windowSurface, BLACK, player)
+    pygame.draw.rect(windowSurface, BLACK, player)
 
     # Check whether the player has intersected with any food squares.
     for food in foods[:]:
@@ -103,7 +103,7 @@ while True:
 
     # Draw the food.
     for i in range(len(foods)):
-        pygame.draw.Rect(windowSurface, GREEN, foods[i])
+        pygame.draw.rect(windowSurface, GREEN, foods[i])
 
     # Draw the window onto the screen.
     pygame.display.update()
