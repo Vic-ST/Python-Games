@@ -26,7 +26,7 @@ BLUE = (0, 0, 255)
 
 # Set up box data struture.
 b1 = {'rect':pygame.Rect(300, 80, 50, 100), 'color':RED, 'dir':UPRIGHT}
-b2 = {'rect':pygame.Rect(200, 200, 20, 20), 'color':GREEN, 'dir':UPLEFT}
+b2 = {'rect':pygame.Rect(200, 200, 90, 60), 'color':GREEN, 'dir':UPLEFT}
 b3 = {'rect':pygame.Rect(100, 150, 60, 60), 'color':BLUE, 'dir':DOWNLEFT}
 boxes = [b1, b2, b3]
 
