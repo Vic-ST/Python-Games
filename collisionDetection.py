@@ -37,8 +37,42 @@ MOVESPEED = 6
 # Run the game loop.
 while True:
     # Check for events
-    for event.type == QUIT:
-        pygame.quit()
-        sys.exit()
-    if event.type == KEYDOWN:
-        # Change the keyboard variables.
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == KEYDOWN:
+            # Change the keyboard variables.
+            if event.key == K_LEFT or event.key == K_a:
+                moveRight = False
+                moveLeft = True
+            if event.key == K_RIGHT or event.key == K_d:
+                moveLeft = False
+                moveRight = True
+            if event.key == K_UP or event.key == K_w:
+                moveDown = False
+                moveUp = True
+            if event.key == K_DOWN or event.key == K_s:
+                moveUp = False
+                moveDown = True
+        if event.key == KEYUP:
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+            if event.key == K_LEFT or event.key == K_a:
+                moveLeft = False
+            if event.key == K_RIGHT or event.key == K_d:
+                moveRight = False
+            if event.key == K_UP or event.key == K_w:
+                moveUp = False
+            if event.key == K_DOWN or event.key == K_s:
+                moveDown = False
+            if event.key == K_x:
+                player.top = randomint(0, WINDOWHEIGHT - player.height)
+                player.left = randomint(0, WINDOWWIDTH - player.width)
+            
+        if event.type == MOUSEBUTTONUP:
+            foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
+
+        foodCounter += 1
+        
