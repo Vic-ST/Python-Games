@@ -88,4 +88,11 @@ while True:
 
         foodCount += 1
         if foodCounter >= NEWFOOD:
-            # Add new food
+            # Add new food.
+            foodCounter = 0
+            foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
+
+        # Draw the white background onto the surface.
+        windowSurface.fill(WHITE)
+
+        # Move the player.
