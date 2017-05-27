@@ -15,12 +15,12 @@ pygame.display.set_caption('Sprites and Sounds')
 WHITE = (255, 255, 255)
 
 # Set up the block data structure.
-player.pygame.Rect(300, 100, 40, 40)
+player = pygame.Rect(300, 100, 40, 40)
 playerImage = pygame.image.load('player.png')
-playerStretchedImag = pygame.transform.scale(playerImage,(40, 40))
+playerStretchedImage = pygame.transform.scale(playerImage,(40, 40))
 foodImage = pygame.image.load('cherry.png')
 foods = []
-for i in range(1,20):
+for i in range(20):
     foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
 
 foodCounter = 0
@@ -86,41 +86,41 @@ while True:
         if event.type == MOUSEBUTTONUP:
             foods.append(pygame.Rect(event.pos[0] - 10, event.pos[1] - 10, 20, 20))
 
-        foodCount += 1
-        if foodCounter >= NEWFOOD:
-            # Add new food.
-            foodCounter = 0
-            foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
+    foodCounter += 1
+    if foodCounter >= NEWFOOD:
+        # Add new food.
+        foodCounter = 0
+        foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
 
-        # Draw the white background onto the surface.
-        windowSurface.fill(WHITE)
+    # Draw the white background onto the surface.
+    windowSurface.fill(WHITE)
 
-        # Move the player.
-        if moveDown and player.bottom < WINDOWHEIGHT:
-            player.top += MOVESPEED
-        if moveUp and player.top > 0:
-            player.top -= MOVESPEED
-        if moveLeft and player.left > 0:
-            player.left -= MOVESPEED
-        if moveRight and player.right < WINDOWWIDTH:
-            player.right += MOVESPEED
+    # Move the player.
+    if moveDown and player.bottom < WINDOWHEIGHT:
+        player.top += MOVESPEED
+    if moveUp and player.top > 0:
+        player.top -= MOVESPEED
+    if moveLeft and player.left > 0:
+        player.left -= MOVESPEED
+    if moveRight and player.right < WINDOWWIDTH:
+        player.right += MOVESPEED
+        
+    # Draw the block onto the surface.
+    windowSurface.blit(playerStretchedImage, player)
+    
+    # Check whether the block has intersected with and food squares.
+    for food in foods[:]:
+        if player.colliderect(food):
+            foods.remove(food)
+            player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
+            playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+            if musicPlaying:
+                pickUpSound.play()
 
-        # Draw the block onto the surface.
-        windowSurface.blit(playerStretchedImage, player)
-
-        # Check whether the block has intersected with and food squares.
-        for food in foods[:]:
-            if player.colliderect(food):
-                foods.remove(food)
-                player = pygame.Rect(player.left, player.top, player.width + , player.height + 2)
-                playerStrechedImage = pygame.transform.scale(playerImage, (player.width, player.height))
-                if musicPlaying:
-                    pickUpSound.play()
-
-        # Draw the food.
-        for i in range(len(foods)):
-            windowSurface.blit(foodImage, food)
-
-        # Draw the window onto the screen.
-        pygame.display.update()
-        mainClock.tick(40)
+    # Draw the food.
+    for food in foods:
+        windowSurface.blit(foodImage, food)
+    
+    # Draw the window onto the screen.
+    pygame.display.update()
+    mainClock.tick(40 )
