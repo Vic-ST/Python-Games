@@ -5,7 +5,6 @@ from pygame.locals import *
 pygame.init()
 mainClock = pygame.time.Clock()
 
-
 # Set up the window.
 WINDOWWIDTH = 400
 WINDOWHEIGHT = 400
@@ -18,4 +17,12 @@ GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 
 # Set up the player and food data structures.
+foodCounter = 0
+NEWFOOD = 40
+FOODSIZE = 20
+player = pygame.Rect(300, 100, 50, 50)
+foods = []
+for i in range(20):
+    foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - FOODSIZE), random.randint(0, WINDOWHEIGHT - FOODSIZE), FOODSIZE, FOODSIZE))
 
+# Set up movement variables.
