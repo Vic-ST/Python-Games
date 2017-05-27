@@ -117,4 +117,10 @@ while True:
                 if musicPlaying:
                     pickUpSound.play()
 
-        
+        # Draw the food.
+        for i in range(len(foods)):
+            windowSurface.blit(foodImage, food)
+
+        # Draw the window onto the screen.
+        pygame.display.update()
+        mainClock.tick(40)
