@@ -84,6 +84,10 @@ while True:
     windowSurface.fill(WHITE)
 
     # Move the player
+    if moveDown and player.bottom < WINDOWHEIGHT:
+        player.top += MOVESPEED
+    if moveUp and player.top > 0:
+        player.top -= MOVESPEED
     if moveLeft and player.left > 0:
         player.left -= MOVESPEED
     if moveRight and player.right < WINDOWWIDTH:
@@ -97,4 +101,10 @@ while True:
         if player.colliderect(food):
             foods.remove(food)
 
-    # Draw the food
+    # Draw the food.
+    for i in range(len(foods)):
+        pygame.draw.Rect(windowSurface, GREEN, foods[i])
+
+    # Draw the window onto the screen.
+    pygame.display.update()
+    mainClock.tick(40)
