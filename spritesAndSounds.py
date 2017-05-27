@@ -1,8 +1,9 @@
 import pygame, sys, time, random
-from pygame.local import *
+from pygame.locals import *
 
 # Set up pygame.
 pygame.init()
+mainClock = pygame.time.Clock()
 
 # Set up the window.
 WINDOWWIDTH = 400
@@ -26,3 +27,17 @@ foodCounter = 0
 NEWFOOD = 40
 
 # Set up keyboard variables.
+moveLeft = False
+moveRight = False
+moveUp = False
+moveDown = False
+
+MOVESPEED = 6
+
+# Set up the music.
+pickUpSound = pygame.mixer.Sound('bang.wav')
+pygame.mixer.music.load('Rynos Theme.mp3')
+pygame.mixer.music.play(-1, 0.0)
+musicPlaying = True
+
+# Run the game loop.
