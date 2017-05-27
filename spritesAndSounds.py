@@ -96,3 +96,25 @@ while True:
         windowSurface.fill(WHITE)
 
         # Move the player.
+        if moveDown and player.bottom < WINDOWHEIGHT:
+            player.top += MOVESPEED
+        if moveUp and player.top > 0:
+            player.top -= MOVESPEED
+        if moveLeft and player.left > 0:
+            player.left -= MOVESPEED
+        if moveRight and player.right < WINDOWWIDTH:
+            player.right += MOVESPEED
+
+        # Draw the block onto the surface.
+        windowSurface.blit(playerStretchedImage, player)
+
+        # Check whether the block has intersected with and food squares.
+        for food in foods[:]:
+            if player.colliderect(food):
+                foods.remove(food)
+                player = pygame.Rect(player.left, player.top, player.width + , player.height + 2)
+                playerStrechedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+                if musicPlaying:
+                    pickUpSound.play()
+
+        
