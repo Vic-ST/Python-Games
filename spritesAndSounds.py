@@ -6,8 +6,8 @@ pygame.init()
 mainClock = pygame.time.Clock()
 
 # Set up the window.
-WINDOWWIDTH = 400
-WINDOWHEIGHT = 400
+WINDOWWIDTH = 1000
+WINDOWHEIGHT = 700
 windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
 pygame.display.set_caption('Sprites and Sounds')
 
@@ -18,7 +18,7 @@ WHITE = (255, 255, 255)
 player = pygame.Rect(300, 100, 40, 40)
 playerImage = pygame.image.load('player.png')
 playerStretchedImage = pygame.transform.scale(playerImage,(40, 40))
-foodImage = pygame.image.load('cherry.png')
+foodImage = pygame.image.load('cherry2.png')
 foods = []
 for i in range(20):
     foods.append(pygame.Rect(random.randint(0, WINDOWWIDTH - 20), random.randint(0, WINDOWHEIGHT - 20), 20, 20))
@@ -123,4 +123,4 @@ while True:
     
     # Draw the window onto the screen.
     pygame.display.update()
-    mainClock.tick(40 )
+    mainClock.tick(40)
