@@ -27,3 +27,9 @@ def waitForPlayerToPressKey():
                     terminate()
                 return
 
+def playerHasHitBaddie(playerRect, baddies):
+    for b in baddies:
+        if playerRect.colliderect(b['rect']):
+            return True
+    return False
+
