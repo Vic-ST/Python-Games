@@ -73,6 +73,18 @@ while True:
                 moveUp = False
             if event.key == K_DOWN or event.key == K_s:
                 moveDown = False
+            if event.key == K_n:
+                foodImage = pygame.image.load('apple.png')
+                """if foodImage == pygame.image.load('cherry2.png'):
+                    foodImage = pygame.image.load('apple.png')
+                elif foodImage == pygame.image.load('apple.png'):
+                    foodImage = pygame.image.load('cherry2.png')
+                else:
+                    print('Error!')"""
+            if event.key == K_c:
+                foodImage = pygame.image.load('cherry2.png')
+            if event.key == K_l:
+                foodImage = pygame.image.load('lemon.png')
             if event.key == K_x:
                 player.top = random.randint(0, WINDOWHEIGHT - player.height)
                 player.left = random.randint(0, WINDOWWIDTH - player.width)
