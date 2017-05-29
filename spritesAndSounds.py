@@ -32,7 +32,7 @@ moveRight = False
 moveUp = False
 moveDown = False
 
-MOVESPEED = 7
+MOVESPEED = 8
 
 # Set up the music.
 pickUpSound = pygame.mixer.Sound('bang.wav')
@@ -121,14 +121,39 @@ while True:
     windowSurface.blit(playerStretchedImage, player)
     
     # Check whether the block has intersected with and food squares.
-    for food in foods[:]:
-        if player.colliderect(food):
-            foods.remove(food)
-            player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
-            playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
-            if musicPlaying:
-                pickUpSound.play()
-
+    if foodImage == 'cherry2.png':
+        for food in foods[:]:
+            if player.colliderect(food):
+                foods.remove(food)
+                player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
+                playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+                if musicPlaying:
+                    pickUpSound.play()
+    elif foodImage == 'apple.png':
+        for food in foods[:]:
+            if player.colliderect(food):
+                foods.remove(food)
+                player = pygame.Rect(player.left, player.top, player.width + 4, player.height + 4)
+                playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+                if musicPlaying:
+                    pickUpSound.play()
+    elif foodImage == 'lemon.png':
+        for food in foods[:]:
+            if player.colliderect(food):
+                foods.remove(food)
+                player = pygame.Rect(player.left, player.top, player.width + 6, player.height + 6)
+                playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+                if musicPlaying:
+                    pickUpSound.play()
+    else:
+        for food in foods[:]:
+            if player.colliderect(food):
+                foods.remove(food)
+                player = pygame.Rect(player.left, player.top, player.width + 2, player.height + 2)
+                playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
+                if musicPlaying:
+                    pickUpSound.play()
+    
     # Draw the food.
     for food in foods:
         windowSurface.blit(foodImage, food)

@@ -122,4 +122,19 @@ while True:
             
             if event.type == MOUSEMOTION:
                 # If the mouse moves, move the player to the cursor.
-                
+                playerRect.centerx = event.pos[0]
+                playerRect.centery = event.pos[1]
+            # Add new baddies at the top of the screen, if needed.
+            if not reverseCheat and not slowCheat:
+                baddieAddCounter += 1
+            if baddieAddCounter == ADDNEWBADDIERATE:
+                baddieAddCounter = 0
+                baddieSize = random.randint(BADDIEMINSIZE, BADDIEMAXSIZE)
+                newBaddie = {'rect': pygame.Rect(random.randint(0, WINDOWWIDTH - baddieSize), 0 - baddieSize, baddieSize, baddieSize),
+                             'speed': random.randint(BADDIEMINSPEED, BADDIEMAXSPEED),
+                             'surface':prygame.transfrom.scale(baddieImage, (baddieSize, baddieSize))
+                             }
+
+                baddies.append(newBaddie)
+
+            # Move the player around.
