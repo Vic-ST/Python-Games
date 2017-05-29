@@ -33,3 +33,10 @@ def playerHasHitBaddie(playerRect, baddies):
             return True
     return False
 
+def drawText(text, font, surface, x, y):
+    textobj = font.render(text, 1, TEXTCOLOR)
+    textrect = textobj.get_rect()
+    textrect.topleft = (x, y)
+    surface.blit(textobj, textrect)
+
+# Set up pygame, the window, and the mouse cursor.
