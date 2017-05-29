@@ -59,3 +59,8 @@ playerRect = playerImage.get_rect()
 baddieImage = pygame.image.load('2016-12-02.gif')
 
 # Show start screen
+windowSurface.fill(BACKGROUNDCOLOR)
+drawText('Dodger', font, windowSurface, (WINDOWWIDTH / 3), (WINDOWHEIGHT / 3))
+drawText('Press a key to start.', font, windowSurface,(WINDOWWIDTH / 3) - 30, (WINDOWHEIGHT / 3) + 50)
+pygame.display.update()
+waitForPlayerToPressKey()
