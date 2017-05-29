@@ -23,7 +23,7 @@ def waitForPlayerToPressKey():
             if event.type == QUIT:
                 terminate()
             if event.type == KEYDOWN:
-                if event.key == ESCAPE: # Pressing ESC quits.
+                if event.key == K_ESCAPE: # Pressing ESC quits.
                     terminate()
                 return
 
@@ -42,7 +42,7 @@ def drawText(text, font, surface, x, y):
 # Set up pygame, the window, and the mouse cursor.
 pygame.init()
 mainClock = pygame.time.Clock()
-windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHIEGHT))
+windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
 pygame.display.set_caption('Dodger')
 pygame.mouse.set_visible(False)
 
@@ -51,7 +51,7 @@ font = pygame.font.SysFont(None, 48)
 
 # Set up sounds.
 gameOverSounds = pygame.mixer.Sound('bang.wav')
-pygame.mixer.music.load('Hitman.mps')
+pygame.mixer.music.load('Hitman.mp3')
 
 # Set up images.
 playerImage = pygame.image.load('2016-12-01.gif')
@@ -64,3 +64,16 @@ drawText('Dodger', font, windowSurface, (WINDOWWIDTH / 3), (WINDOWHEIGHT / 3))
 drawText('Press a key to start.', font, windowSurface,(WINDOWWIDTH / 3) - 30, (WINDOWHEIGHT / 3) + 50)
 pygame.display.update()
 waitForPlayerToPressKey()
+
+topScore = 0
+while True:
+    # Set up the start of the game.
+    baddies = []
+    score = 0
+    playerRect.topleft = (WINDOWWIDTH / 2, WINDOWHEIGHT - 50)
+    moveLeft = moveRight = moveUp = moveDown = False
+    reverseCheat = slowCheat = False
+    baddieAddCounter = 0
+    pygame.mixer.music.play(-1, 0.0)
+
+    
