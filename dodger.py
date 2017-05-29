@@ -138,3 +138,16 @@ while True:
                 baddies.append(newBaddie)
 
             # Move the player around.
+            if moveLeft and playerRect.left > 0:
+                playerRect.move_ip(-1 * PLAYERMOVERATE, 0)
+            if moveRight and playerRect.right < WINDOWWIDTH:
+                playerRect.move_ip(PLAYERMOVERATE, 0)
+            if moveUp and playerRect.top > 0:
+                playerRect.move_ip(0, -1 * PLAYERMOVERATE)
+            if moveDown and playerRect.bottom < WINDOWHEIGHT:
+                playerRect.move_ip(0, PLAYERMOVERATE)
+
+            # Move the baddies down.
+            for b in baddies:
+                if not reverseCheat and not slowCheat:
+                    
