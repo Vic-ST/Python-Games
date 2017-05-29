@@ -47,3 +47,15 @@ pygame.display.set_caption('Dodger')
 pygame.mouse.set_visible(False)
 
 # Set up the fonts.
+font = pygame.font.SysFont(None, 48)
+
+# Set up sounds.
+gameOverSounds = pygame.mixer.Sound('bang.wav')
+pygame.mixer.music.load('Hitman.mps')
+
+# Set up images.
+playerImage = pygame.image.load('2016-12-01.gif')
+playerRect = playerImage.get_rect()
+baddieImage = pygame.image.load('2016-12-02.gif')
+
+# Show start screen
