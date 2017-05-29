@@ -76,4 +76,50 @@ while True:
     baddieAddCounter = 0
     pygame.mixer.music.play(-1, 0.0)
 
-    
+    while True: # The game loop runs while the game is playing.
+        score += 1 # Increase score.
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                terminate()
+
+            if event.type == KEYDOWN:
+                if event.key == K_z:
+                    reversCheat = True
+                if event.key == K_x:
+                    slowCheat = True
+                if event.key == K_LEFT or event.key == K_a:
+                    moveRight = False
+                    moveLeft = True
+                if event.key == K_RIGHT or event.key == K_d:
+                    moveLeft = False
+                    moveRight = True
+                if event.key == K_UP or event.key == K_w:
+                    moveDown = False
+                    moveUp = True
+                if event.key == K_DOWN or event.key == K_s:
+                    moveUp = False
+                    moveDown = True
+
+            if event.type == KEYUP:
+                if event == K_z:
+                    reverseCheat = False
+                    score = 0
+                if event == K_x:
+                    slowCheat = False
+                    score = 0
+                if event == K_ESCAPE:
+                    terminate()
+                
+                if event.key == K_LEFT or event.key == K_a:
+                    moveLeft = False
+                if event.key == K_RIGHT or event.key == K_d:
+                    moveRight = False
+                if event.key == K_UP or event.key == K_w:
+                    moveUp = False
+                if event.key == K_DOWN or event.key == K_s:
+                    moveDown = False
+            
+            if event.type == MOUSEMOTION:
+                # If the mouse moves, move the player to the cursor.
+                
