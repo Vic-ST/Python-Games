@@ -6,7 +6,7 @@ pygame.init()
 mainClock = pygame.time.Clock()
 
 # Set up the window.
-WINDOWWIDTH = 1000
+WINDOWWIDTH = 1250
 WINDOWHEIGHT = 700
 windowSurface = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT), 0, 32)
 pygame.display.set_caption('Sprites and Sounds')
@@ -32,7 +32,7 @@ moveRight = False
 moveUp = False
 moveDown = False
 
-MOVESPEED = 6
+MOVESPEED = 7
 
 # Set up the music.
 pickUpSound = pygame.mixer.Sound('bang.wav')
@@ -123,4 +123,4 @@ while True:
     
     # Draw the window onto the screen.
     pygame.display.update()
-    mainClock.tick(40)
+    mainClock.tick(70)
