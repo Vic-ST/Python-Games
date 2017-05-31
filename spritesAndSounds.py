@@ -124,7 +124,7 @@ while True:
     windowSurface.blit(playerStretchedImage, player)
     
     # Check whether the block has intersected with and food squares.
-    if foodImage == 'cherry2.png':
+    if foodImage == '<Surface(63x71x24 SW)>':
         for food in foods[:]:
             if player.colliderect(food):
                 foods.remove(food)
@@ -132,7 +132,7 @@ while True:
                 playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
                 if musicPlaying:
                     pickUpSound.play()
-    elif foodImage == 'apple.png':
+    elif foodImage == '<Surface(41x54x24 SW)>':
         for food in foods[:]:
             if player.colliderect(food):
                 foods.remove(food)
@@ -140,7 +140,7 @@ while True:
                 playerStretchedImage = pygame.transform.scale(playerImage, (player.width, player.height))
                 if musicPlaying:
                     pickUpSound.play()
-    elif foodImage == 'lemon.png':
+    elif foodImage == '<Surface(30x38x24 SW)>':
         for food in foods[:]:
             if player.colliderect(food):
                 foods.remove(food)
