@@ -169,4 +169,20 @@ while True:
             drawText('Top Score: %s' % (topScore), font, windowSurface, 10, 40)
             
             # Draw the players rectangle.
-            
+            windoSurface.blit(playerImage, playerRect)
+
+            # Draw each baddie.
+            for b in baddies:
+                windowSurface.blit(b['surface'], b['rect'])
+
+            pygame.display.update()
+
+            # Check in any baddies have hit the player.
+            if playerHasHitBaddie(playerRect, baddies):
+                if score > topScore:
+                    topScore = score # Set new top score.
+                break
+
+            mainClock.tick(FPS)
+
+        # Stop the game and show the "Game Over" screen.
