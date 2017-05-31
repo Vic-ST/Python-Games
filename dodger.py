@@ -157,4 +157,8 @@ while True:
                     b['rect'].move_ip(0, 1)
 
             # Delete baddies that have fallen past the bottom.
-            
+            for b in baddies[:]:
+                if b['rect'].top > WINDOWHEIGHT:
+                    baddies.remove(b)
+
+            # Draw the game world on the window.
