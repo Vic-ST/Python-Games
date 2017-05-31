@@ -6,8 +6,8 @@ WINDOWHEIGHT = 600
 TEXTCOLOR = (0, 0, 0)
 BACKGROUNDCOLOR = (255, 255, 255)
 FPS = 60
-BADDIEMINSIZE = 10
-BADDIEMAXSIZE = 60
+BADDIEMINSIZE = 20
+BADDIEMAXSIZE = 40
 BADDIEMINSPEED = 1
 BADDIEMAXSPEED = 8
 ADDNEWBADDIERATE = 6
@@ -50,7 +50,7 @@ pygame.mouse.set_visible(False)
 font = pygame.font.SysFont(None, 48)
 
 # Set up sounds.
-gameOverSounds = pygame.mixer.Sound('bang.wav')
+gameOverSound = pygame.mixer.Sound('bang.wav')
 pygame.mixer.music.load('Hitman.mp3')
 
 # Set up images.
@@ -85,7 +85,7 @@ while True:
 
             if event.type == KEYDOWN:
                 if event.key == K_z:
-                    reversCheat = True
+                    reverseCheat = True
                 if event.key == K_x:
                     slowCheat = True
                 if event.key == K_LEFT or event.key == K_a:
@@ -102,13 +102,13 @@ while True:
                     moveDown = True
 
             if event.type == KEYUP:
-                if event == K_z:
+                if event.key == K_z:
                     reverseCheat = False
                     score = 0
-                if event == K_x:
+                if event.key == K_x:
                     slowCheat = False
                     score = 0
-                if event == K_ESCAPE:
+                if event.key == K_ESCAPE:
                     terminate()
                 
                 if event.key == K_LEFT or event.key == K_a:
@@ -124,74 +124,74 @@ while True:
                 # If the mouse moves, move the player to the cursor.
                 playerRect.centerx = event.pos[0]
                 playerRect.centery = event.pos[1]
-            # Add new baddies at the top of the screen, if needed.
+        # Add new baddies at the top of the screen, if needed.
+        if not reverseCheat and not slowCheat:
+            baddieAddCounter += 1
+        if baddieAddCounter == ADDNEWBADDIERATE:
+            baddieAddCounter = 0
+            baddieSize = random.randint(BADDIEMINSIZE, BADDIEMAXSIZE)
+            newBaddie = {'rect': pygame.Rect(random.randint(0, WINDOWWIDTH - baddieSize), 0 - baddieSize, baddieSize, baddieSize),
+                        'speed': random.randint(BADDIEMINSPEED, BADDIEMAXSPEED),
+                        'surface':pygame.transform.scale(baddieImage, (baddieSize, baddieSize))
+                        }
+
+            baddies.append(newBaddie)
+
+        # Move the player around.
+        if moveLeft and playerRect.left > 0:
+            playerRect.move_ip(-1 * PLAYERMOVERATE, 0)
+        if moveRight and playerRect.right < WINDOWWIDTH:
+            playerRect.move_ip(PLAYERMOVERATE, 0)
+        if moveUp and playerRect.top > 0:
+            playerRect.move_ip(0, -1 * PLAYERMOVERATE)
+        if moveDown and playerRect.bottom < WINDOWHEIGHT:
+            playerRect.move_ip(0, PLAYERMOVERATE)
+
+        # Move the baddies down.
+        for b in baddies:
             if not reverseCheat and not slowCheat:
-                baddieAddCounter += 1
-            if baddieAddCounter == ADDNEWBADDIERATE:
-                baddieAddCounter = 0
-                baddieSize = random.randint(BADDIEMINSIZE, BADDIEMAXSIZE)
-                newBaddie = {'rect': pygame.Rect(random.randint(0, WINDOWWIDTH - baddieSize), 0 - baddieSize, baddieSize, baddieSize),
-                             'speed': random.randint(BADDIEMINSPEED, BADDIEMAXSPEED),
-                             'surface':prygame.transfrom.scale(baddieImage, (baddieSize, baddieSize))
-                             }
+                b['rect'].move_ip(0, b['speed'])
+            elif reverseCheat:
+                b['rect'].move_ip(0, -5)
+            elif slowCheat:
+                b['rect'].move_ip(0, 1)
 
-                baddies.append(newBaddie)
+        # Delete baddies that have fallen past the bottom.
+        for b in baddies[:]:
+            if b['rect'].top > WINDOWHEIGHT:
+                baddies.remove(b)
 
-            # Move the player around.
-            if moveLeft and playerRect.left > 0:
-                playerRect.move_ip(-1 * PLAYERMOVERATE, 0)
-            if moveRight and playerRect.right < WINDOWWIDTH:
-                playerRect.move_ip(PLAYERMOVERATE, 0)
-            if moveUp and playerRect.top > 0:
-                playerRect.move_ip(0, -1 * PLAYERMOVERATE)
-            if moveDown and playerRect.bottom < WINDOWHEIGHT:
-                playerRect.move_ip(0, PLAYERMOVERATE)
+        # Draw the game world on the window.
+        windowSurface.fill(BACKGROUNDCOLOR)
 
-            # Move the baddies down.
-            for b in baddies:
-                if not reverseCheat and not slowCheat:
-                    b['rect'].move_ip(0, b['speed'])
-                elif reverseCheat:
-                    b['rect'].move_ip(0, -5)
-                elif slowCheat:
-                    b['rect'].move_ip(0, 1)
-
-            # Delete baddies that have fallen past the bottom.
-            for b in baddies[:]:
-                if b['rect'].top > WINDOWHEIGHT:
-                    baddies.remove(b)
-
-            # Draw the game world on the window.
-            windowSurface.fill(BACKGROUNDCOLOR)
-
-            # Draw the score and the top score.
-            drawText('Score: %s' % (score), font, windowSurface, 10, 0)
-            drawText('Top Score: %s' % (topScore), font, windowSurface, 10, 40)
+        # Draw the score and the top score.
+        drawText('Score: %s' % (score), font, windowSurface, 10, 0)
+        drawText('Top Score: %s' % (topScore), font, windowSurface, 10, 40)
             
-            # Draw the players rectangle.
-            windoSurface.blit(playerImage, playerRect)
+        # Draw the players rectangle.
+        windowSurface.blit(playerImage, playerRect)
 
-            # Draw each baddie.
-            for b in baddies:
-                windowSurface.blit(b['surface'], b['rect'])
+        # Draw each baddie.
+        for b in baddies:
+            windowSurface.blit(b['surface'], b['rect'])
 
-            pygame.display.update()
-
-            # Check in any baddies have hit the player.
-            if playerHasHitBaddie(playerRect, baddies):
-                if score > topScore:
-                    topScore = score # Set new top score.
-                break
-
-            mainClock.tick(FPS)
-
-        # Stop the game and show the "Game Over" screen.
-        pygame.mixer.music.stop()
-        gameOverSound.play()
-
-        drawText('GAME OVER', font, windowSurface, (WINDOWWIDTH / 3) - 80, (WINDOWHEIGHT / 3) + 50)
-        drawText('Press any key to play again.', font, windowSurface, (WINDOWWIDTH / 3) - 80, (WINDOWHEIGHT / 3) + 50)
         pygame.display.update()
-        waitForPlayerToPressKey()
 
-        gameOverSound.stop()
+        # Check in any baddies have hit the player.
+        if playerHasHitBaddie(playerRect, baddies):
+            if score > topScore:
+                topScore = score # Set new top score.
+            break
+
+        mainClock.tick(FPS)
+
+    # Stop the game and show the "Game Over" screen.
+    pygame.mixer.music.stop()
+    gameOverSound.play()
+
+    drawText('GAME OVER', font, windowSurface, (WINDOWWIDTH / 3), (WINDOWHEIGHT / 3))
+    drawText('Press any key to play again.', font, windowSurface, (WINDOWWIDTH / 3) - 80, (WINDOWHEIGHT / 3) + 50)
+    pygame.display.update()
+    waitForPlayerToPressKey()
+
+    gameOverSound.stop()
