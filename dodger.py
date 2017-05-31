@@ -162,3 +162,11 @@ while True:
                     baddies.remove(b)
 
             # Draw the game world on the window.
+            windowSurface.fill(BACKGROUNDCOLOR)
+
+            # Draw the score and the top score.
+            drawText('Score: %s' % (score), font, windowSurface, 10, 0)
+            drawText('Top Score: %s' % (topScore), font, windowSurface, 10, 40)
+            
+            # Draw the players rectangle.
+            
