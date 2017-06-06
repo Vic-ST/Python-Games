@@ -42,3 +42,22 @@ def getRandomWord(wordList):
     wordIndex = randomint(0, len(wordList) - 1)
     return wordList[wordIndex]
 
+def displayBoard(missedLetters, correctLetters, secretWord):
+    print(HANGMAN_PICS[len(missedLetters)])
+    print()
+
+    print('Missed letters:', end=' ')
+    for letter in missedLetters:
+        print(letter, end=' ')
+    print()
+
+    blanks = '_' * len(secretWord)
+
+    for i in range(len(secretWord)): # Replace blanks with correctly guessed letters.
+        if secretWord[i] in correctLetters:
+            blanks = blanks[:i] + secretWord[i] + blanks[i+1:]
+
+    for letters in blanks: # Show the secret word with spaces in between each letter.
+        print(letter, end=' ')
+    print()
+
