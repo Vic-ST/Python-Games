@@ -190,18 +190,22 @@ while True:
             BACKGROUNDCOLOR = (255, 255, 255)
             BADDIEMINSPEED = 1
             BADDIEMAXSPEED = 8
+            TEXTCOLOR = (0, 0, 0)
         if score >= 1000:
             BACKGROUNDCOLOR = (0, 0, 0)
             BADDIEMINSPEED = 2
             BADDIEMAXSPEED = 9
+            TEXTCOLOR = (255, 255, 255)
         if score >= 1500:
             BACKGROUNDCOLOR = (255, 255, 255)
             BADDIEMINSPEED = 2
             BADDIEMAXSPEED = 9
+            TEXTCOLOR = (0, 0, 0)
         if score >= 2500:
             BACKGROUNDCOLOR = (0, 0, 0)
             BADDIEMINSPEED = 3
             BADDIEMAXSPEED = 10
+            TEXTCOLOR = (255, 255, 255)
     # Stop the game and show the "Game Over" screen.
     pygame.mixer.music.stop()
     gameOverSound.play()
