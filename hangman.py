@@ -76,3 +76,19 @@ def getGuess(alreadyGuessed):
         else:
             return guess
 
+def playAgain():
+    # This function returns True if the player wants to play again; otherwise, it returns False.
+    print('Do you want to play again? (yes or no)')
+    return input().lower().startswith('y')
+
+
+print('H A N G M A N')
+missedLetters = ''
+corretLetters = ''
+secretWord = getRandomWord(words)
+gameIsDone = False
+
+while True:
+    displayBoard(missedLetters, correctLetters)
+
+    
