@@ -115,4 +115,12 @@ while True:
             print('You have run out of guesses!\nAfter ' + str(len(missedLetters)) + ' missed guesses and ' + str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
             gameIsDone = True
 
-    # Ask the player 
+    # Ask the player if they want to play again (but only if the game is done).
+    if gameIsDone:
+        if playAgain():
+            missedLetters = ''
+            corretLetters = ''
+            secretWord = getRandomWord(words)
+            gameIsDone = False
+        else:
+            break
